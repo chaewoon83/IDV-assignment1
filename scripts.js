@@ -15,8 +15,8 @@ async function fetchAndDisplayRawJSON() {
         outputElement.textContent = jsonString;
 
     } catch (error) {
-        console.error("API 요청 실패:", error);
-        outputElement.textContent = `데이터를 가져오는 데 실패했습니다: ${error.message}`;
+        console.error("API request failed:", error);
+        outputElement.textContent = `failed to fetch data: ${error.message}`;
     }
 }
 
