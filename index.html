@@ -1,5 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+    #psi-data {
+        max-width: 1000px; 
+        margin: 0 auto; 
+        border: 1px solid darkgrey;
+        border-spacing: 0;  
+        background-color: white;
+    }
+    #psi-data th, #psi-data td {
+        border: 2px solid darkgrey; 
+        padding: 10px 20px;
+        text-align: center; 
+        vertical-align: middle;
+    }
+    #psi-data .warning {
+    background-color: orange; 
+    color: #333; 
+    font-weight: bold;
+    }
+
+    #psi-data .danger {
+    background-color: red; 
+    color: white;
+    font-weight: bold;
+    }
+    #psi-data .safe {
+    background-color: green; 
+    color: white;
+    font-weight: bold;
+    }
+    </style>
 <head>
     <meta charset="UTF-8">
     <title>Singapore PSI</title>
@@ -7,7 +38,8 @@
 <body>
     <h1>Realtime PSI value</h1>
     
-    <div id="psi-data">Loading...</div>
+    <h2 id="timestamp">Loading...</h2>
+    <div id="psi-table">Loading...</div>
 
     <script src="script.js"></script>
 </body>

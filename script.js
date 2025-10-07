@@ -1,4 +1,5 @@
-let outputElement = document.getElementById('psi-data');
+let outputElement = document.getElementById('psi-table');
+let timestamp = document.getElementById('timestamp');
 
 async function fetchAndDisplayRawJSON() {
     try {
@@ -10,14 +11,55 @@ async function fetchAndDisplayRawJSON() {
         
         const data = await response.json();
 
-        const jsonString = JSON.stringify(data, null, 2);
+        const timestampData = data.data.items[0].timestamp; 
+        timestamp.textContent = timestampData;
+        
+        outputElement.innerHTML = createTable(data.data.items[0].readings)
 
-        outputElement.textContent = jsonString;
 
     } catch (error) {
         console.error("API request failed:", error);
-        outputElement.textContent = `failed to fetch data: ${error.message}`;
     }
 }
+
+function createTable(psiData) {
+    const headers = Object.keys(psiData);
+
+    let table = '<table id="psi-data">';
+
+    table += '<thead><tr>';
+    ['type','west','east','central','south','north'].forEach(region => {
+        table += `<th scope="region">${region.toUpperCase()}</th>`;
+    });
+    table += '</tr></thead>';
+
+    table += '<tbody>';
+    headers.forEach(item => {
+        table += '<tr>';
+        table += `<th>${item}</th>`;
+
+        Object.keys(psiData[item]).forEach(key => {
+            let value = psiData[item][key];
+            
+            if(value > 40){
+                dangerClass = "danger"
+            }
+            else if (value > 20){
+                dangerClass = "warning"
+            }
+            else {
+                dangerClass = "safe";
+            }
+            table += `<td class="${dangerClass}">${value}</td>`;
+        });
+        table += '</tr>';
+    });
+    table += '</tbody>';
+
+    table += '</table>';
+    
+    return table;
+}
+
 
 fetchAndDisplayRawJSON();
