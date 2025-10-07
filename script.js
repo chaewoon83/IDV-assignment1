@@ -28,7 +28,7 @@ function createTable(psiData) {
     let table = '<table id="psi-data">';
 
     table += '<thead><tr>';
-    ['type','west','east','central','south','north'].forEach(region => {
+    ['type\\Region','west','east','central','south','north'].forEach(region => {
         table += `<th scope="region">${region.toUpperCase()}</th>`;
     });
     table += '</tr></thead>';
@@ -40,7 +40,6 @@ function createTable(psiData) {
 
         Object.keys(psiData[item]).forEach(key => {
             let value = psiData[item][key];
-            
             if(value > 40){
                 dangerClass = "danger"
             }
